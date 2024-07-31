@@ -80,6 +80,7 @@ import { FooterComponent } from './layouts/footer';
 import { SidebarComponent } from './layouts/sidebar';
 import { ThemeCustomizerComponent } from './layouts/theme-customizer';
 import { IconModule } from './shared/icon/icon.module';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
     imports: [
@@ -131,6 +132,7 @@ import { IconModule } from './shared/icon/icon.module';
         AuthLayout,
         KnowledgeBaseComponent,
         FaqComponent,
+        LandingComponent,
     ],
 
     providers: [

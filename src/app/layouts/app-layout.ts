@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppService } from '../service/app.service';
 import { Router, NavigationEnd, Event as RouterEvent } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -11,7 +12,15 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppLayout {
     store: any;
     showTopButton = false;
-    constructor(public translate: TranslateService, public storeData: Store<any>, private service: AppService, private router: Router) {
+    showHeaderFooter: boolean = true;
+
+    constructor(
+        public translate: TranslateService,
+        public storeData: Store<any>,
+        private service: AppService,
+        private router: Router,
+        private route: ActivatedRoute
+    ) {
         this.initStore();
     }
     headerClass = '';
@@ -24,6 +33,10 @@ export class AppLayout {
             } else {
                 this.showTopButton = false;
             }
+        });
+
+        this.router.events.subscribe(() => {
+            this.checkRoute();
         });
     }
 
@@ -63,5 +76,15 @@ export class AppLayout {
     goToTop() {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
+    }
+
+    checkRoute(): void {
+        const currentRoute = this.router.url;
+        if (currentRoute === '/') {
+            // Replace with your landing page route
+            this.showHeaderFooter = false;
+        } else {
+            this.showHeaderFooter = true;
+        }
     }
 }

@@ -64,7 +64,7 @@
                         <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl">Sign Up</h1>
                         <p class="text-base font-bold leading-normal text-white-dark">Enter your email and password to register</p>
                     </div>
-                    <form class="space-y-5 dark:text-white" (submit)="router.navigate(['/'])">
+                    <form class="space-y-5 dark:text-white" (submit)="router.navigate(['/dashboard'])">
                         <div>
                             <label for="Name">Name</label>
                             <div class="relative text-white-dark">
@@ -80,6 +80,15 @@
                                 <input id="Email" type="email" placeholder="Enter Email" class="form-input ps-10 placeholder:text-white-dark" />
                                 <span class="absolute start-4 top-1/2 -translate-y-1/2">
                                     <icon-mail [fill]="true" />
+                                </span>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="Email">Mobile</label>
+                            <div class="relative text-white-dark">
+                                <input id="Email" type="email" placeholder="Enter Mobile" class="form-input ps-10 placeholder:text-white-dark" />
+                                <span class="absolute start-4 top-1/2 -translate-y-1/2">
+                                    <icon-phone-call [fill]="true" />
                                 </span>
                             </div>
                         </div>

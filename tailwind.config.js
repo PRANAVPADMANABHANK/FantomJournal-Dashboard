@@ -8,7 +8,9 @@ const rotateX = plugin(function ({ addUtilities }) {
     });
 });
 module.exports = {
-    content: ['./src/**/*.{html,ts}'],
+    content: [
+        './src/**/*.{html,ts}',  // Include all files
+    ],
     darkMode: 'class',
     theme: {
         container: {

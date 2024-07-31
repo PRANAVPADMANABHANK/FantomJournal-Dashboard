@@ -58,12 +58,12 @@
 
         <div class="main-container min-h-screen text-black dark:text-white-dark" [ngClass]="[store.navbar]">
             <!--  BEGIN SIDEBAR  -->
-            <sidebar></sidebar>
+            <sidebar *ngIf="showHeaderFooter"></sidebar>
             <!--  END SIDEBAR  -->
 
             <div class="main-content flex flex-col min-h-screen">
                 <!--  BEGIN TOP NAVBAR  -->
-                <header></header>
+                <header *ngIf="showHeaderFooter"></header>
                 <!--  END TOP NAVBAR  -->
 
                 <!--  BEGIN CONTENT AREA  -->
@@ -73,7 +73,7 @@
                 <!--  END CONTENT AREA  -->
 
                 <!-- BEGIN FOOTER -->
-                <footer></footer>
+                <footer *ngIf="showHeaderFooter"></footer>
                 <!-- END FOOTER -->
             </div>
         </div>
