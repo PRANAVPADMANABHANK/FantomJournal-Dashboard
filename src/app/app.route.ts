@@ -30,6 +30,10 @@ import { KnowledgeBaseComponent } from './pages/knowledge-base';
 import { FaqComponent } from './pages/faq';
 import { LandingComponent } from './landing/landing.component';
 
+
+import { AuthGuard } from './service/auth.guard';
+
+
 export const routes: Routes = [
     {
         path: '',
@@ -37,7 +41,7 @@ export const routes: Routes = [
         children: [
             // dashboard
             {path:'', component:LandingComponent},
-            { path: 'dashboard', component: IndexComponent, title: 'Sales Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
+            { path: 'dashboard', component: IndexComponent, canActivate: [AuthGuard], title: 'Sales Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
             { path: 'analytics', component: AnalyticsComponent, title: 'Analytics Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
             { path: 'finance', component: FinanceComponent, title: 'Finance Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
             { path: 'crypto', component: CryptoComponent, title: 'Crypto Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },

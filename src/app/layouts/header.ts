@@ -5,6 +5,8 @@ import { AppService } from '../service/app.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../service/auth.service'; // Adjust the path if necessary
+
 
 @Component({
     moduleId: module.id,
@@ -84,10 +86,17 @@ export class HeaderComponent {
         public storeData: Store<any>,
         public router: Router,
         private appSetting: AppService,
-        private sanitizer: DomSanitizer
+        private sanitizer: DomSanitizer,
+        private appService: AuthService
     ) {
         this.initStore();
     }
+
+    // Method to handle sign out
+    onSignOut(): void {
+        this.appService.logout();
+    }
+
     async initStore() {
         this.storeData
             .select((d) => d.index)
@@ -138,9 +147,9 @@ export class HeaderComponent {
         this.translate.use(item.code);
         this.appSetting.toggleLanguage(item);
         if (this.store.locale?.toLowerCase() === 'ae') {
-            this.storeData.dispatch({type: 'toggleRTL', payload: 'rtl'});
+            this.storeData.dispatch({ type: 'toggleRTL', payload: 'rtl' });
         } else {
-            this.storeData.dispatch({type: 'toggleRTL', payload: 'ltr'});
+            this.storeData.dispatch({ type: 'toggleRTL', payload: 'ltr' });
         }
         window.location.reload();
     }

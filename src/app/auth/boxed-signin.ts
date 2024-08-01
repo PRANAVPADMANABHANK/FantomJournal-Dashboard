@@ -36,6 +36,9 @@ export class BoxedSigninComponent {
 
     onLogin(): void {
         this.authService.login(this.email, this.password).subscribe((response) => {
+
+            console.log(response, "response got in ui")
+            
             if (response && response.accessToken) {
                 // Successful login, navigate to dashboard or another page
                 this.router.navigate(['/dashboard']);

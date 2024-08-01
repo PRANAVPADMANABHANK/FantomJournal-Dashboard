@@ -2,15 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, switchMap, catchError, throwError } from 'rxjs';
 import { AuthResponse } from '../models/auth-response.model'; // Adjust the path as needed
+import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
+
+
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    private baseUrl = 'http://localhost:5040/api'; // Adjust URL if necessary
+    private baseUrl = environment.apiUrl; // Adjust URL if necessary
     private refreshTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         this.loadTokens();
     }
 
@@ -71,5 +75,7 @@ export class AuthService {
 
     logout(): void {
         this.removeTokens();
+        console.log("access, refresh - token removed")
+        this.router.navigate(['/auth/boxed-signin']);
     }
 }
