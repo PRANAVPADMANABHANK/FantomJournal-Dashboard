@@ -7,7 +7,6 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../service/auth.service'; // Adjust the path if necessary
 
-
 @Component({
     moduleId: module.id,
     selector: 'header',
@@ -20,6 +19,9 @@ import { AuthService } from '../service/auth.service'; // Adjust the path if nec
     ],
 })
 export class HeaderComponent {
+    userName: string | null = '';
+    userEmail: string | null = '';
+
     store: any;
     search = false;
     notifications = [
@@ -106,6 +108,11 @@ export class HeaderComponent {
     }
 
     ngOnInit() {
+        this.userName = localStorage.getItem('userName');
+        this.userEmail = localStorage.getItem('userEmail');
+
+        
+        console.log(localStorage, 'username got');
         this.setActiveDropdown();
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {

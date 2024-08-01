@@ -5,8 +5,6 @@ import { AuthResponse } from '../models/auth-response.model'; // Adjust the path
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 
-
-
 @Injectable({
     providedIn: 'root',
 })
@@ -16,6 +14,11 @@ export class AuthService {
 
     constructor(private http: HttpClient, private router: Router) {
         this.loadTokens();
+    }
+
+    private storeUserInfo(user: { name: string; email: string }) {
+        localStorage.setItem('userName', user.name);
+        localStorage.setItem('userEmail', user.email);
     }
 
     private storeTokens(accessToken: string, refreshToken: string): void {
@@ -39,6 +42,7 @@ export class AuthService {
             switchMap((response) => {
                 if (response && response.accessToken && response.refreshToken) {
                     this.storeTokens(response.accessToken, response.refreshToken);
+                    this.storeUserInfo(response.user);
                 }
                 return of(response);
             }),
@@ -75,7 +79,7 @@ export class AuthService {
 
     logout(): void {
         this.removeTokens();
-        console.log("access, refresh - token removed")
+        console.log('access, refresh - token removed');
         this.router.navigate(['/auth/boxed-signin']);
     }
 }

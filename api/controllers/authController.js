@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 // Function to generate access and refresh tokens
 const generateTokens = (user) => {
     console.log(user, "generate token user")
-    
+
     const accessToken = jwt.sign(
         { userId: user._id, email: user.email },
         process.env.JWT_SECRET,
@@ -60,7 +60,12 @@ exports.login = async (req, res) => {
         // Generate tokens
         const { accessToken, refreshToken } = generateTokens(user);
 
-        res.status(200).json({ message: 'Login successful', accessToken, refreshToken });
+        res.status(200).json({
+            message: 'Login successful', accessToken, refreshToken, user: {
+                name: user.name,
+                email: user.email,
+            }
+        });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
