@@ -3,8 +3,12 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { AuthInterceptor } from './interceptors/auth.interceptor'; // Adjust the path if necessary
+import { AuthService } from './service/auth.service'; // Adjust the path if necessary
+
+
 
 
 //Routes
@@ -138,19 +142,21 @@ import { LandingComponent } from './landing/landing.component';
 
     providers: [
         AppService,
+        AuthService, // Add AuthService here
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, // Add AuthInterceptor here
         Title,
         {
-            provide: HIGHLIGHT_OPTIONS,
-            useValue: {
-                coreLibraryLoader: () => import('highlight.js/lib/core'),
-                languages: {
-                    json: () => import('highlight.js/lib/languages/json'),
-                    typescript: () => import('highlight.js/lib/languages/typescript'),
-                    xml: () => import('highlight.js/lib/languages/xml'),
-                },
+          provide: HIGHLIGHT_OPTIONS,
+          useValue: {
+            coreLibraryLoader: () => import('highlight.js/lib/core'),
+            languages: {
+              json: () => import('highlight.js/lib/languages/json'),
+              typescript: () => import('highlight.js/lib/languages/typescript'),
+              xml: () => import('highlight.js/lib/languages/xml'),
             },
+          },
         },
-    ],
+      ],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

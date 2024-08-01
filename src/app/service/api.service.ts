@@ -17,5 +17,13 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/signup`, data);
   }
 
+
+  // Example login method
+
+  login(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/login`, data);
+  }
+  
+
   // Other API methods can be added here
 }

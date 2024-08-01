@@ -48,7 +48,7 @@ export class BoxedSignupComponent {
         this.apiService.signup(signupData).subscribe({
             next: (response) => {
               console.log('Signup successful', response);
-              this.router.navigate(['/dashboard']);
+              this.router.navigate(['/auth/boxed-signin']);
             },
             error: (error) => {
               console.error('Signup failed', error);

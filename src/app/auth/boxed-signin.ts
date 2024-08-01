@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { AppService } from 'src/app/service/app.service';
+import { HttpClient } from '@angular/common/http';
+import { ApiService } from '../service/api.service';
+import { AuthService } from '../service/auth.service'; // Adjust the path if necessary
 
 @Component({
     moduleId: module.id,
@@ -16,10 +19,33 @@ import { AppService } from 'src/app/service/app.service';
     ],
 })
 export class BoxedSigninComponent {
+    email: string = '';
+    password: string = '';
     store: any;
-    constructor(public translate: TranslateService, public storeData: Store<any>, public router: Router, private appSetting: AppService) {
+    constructor(
+        public translate: TranslateService,
+        public storeData: Store<any>,
+        public router: Router,
+        private appSetting: AppService,
+        private http: HttpClient,
+        private apiService: ApiService,
+        private authService: AuthService
+    ) {
         this.initStore();
     }
+
+    onLogin(): void {
+        this.authService.login(this.email, this.password).subscribe((response) => {
+            if (response && response.accessToken) {
+                // Successful login, navigate to dashboard or another page
+                this.router.navigate(['/dashboard']);
+            } else {
+                // Handle login failure
+                console.error('Login failed');
+            }
+        });
+    }
+
     async initStore() {
         this.storeData
             .select((d) => d.index)
