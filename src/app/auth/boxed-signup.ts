@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { AppService } from 'src/app/service/app.service';
+import { HttpClient } from '@angular/common/http';
+import { ApiService } from '../service/api.service';
 
 @Component({
     moduleId: module.id,
@@ -16,10 +18,44 @@ import { AppService } from 'src/app/service/app.service';
     ],
 })
 export class BoxedSignupComponent {
+    name: string = '';
+    email: string = '';
+    mobile: number = 0;
+    password: string = '';
+
     store: any;
-    constructor(public translate: TranslateService, public storeData: Store<any>, public router: Router, private appSetting: AppService) {
+    constructor(
+        public translate: TranslateService,
+        public storeData: Store<any>,
+        public router: Router,
+        private appSetting: AppService,
+        private http: HttpClient,
+        private apiService: ApiService
+    ) {
         this.initStore();
     }
+
+    onSubmit() {
+        const signupData = {
+            name: this.name,
+            email: this.email,
+            mobile: this.mobile,
+            password: this.password,
+        };
+
+        console.log("submit success")
+        // Send data to the server
+        this.apiService.signup(signupData).subscribe({
+            next: (response) => {
+              console.log('Signup successful', response);
+              this.router.navigate(['/dashboard']);
+            },
+            error: (error) => {
+              console.error('Signup failed', error);
+            },
+          });
+    }
+
     async initStore() {
         this.storeData
             .select((d) => d.index)
