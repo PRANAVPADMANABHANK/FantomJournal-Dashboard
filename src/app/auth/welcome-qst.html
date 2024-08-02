@@ -1,0 +1,103 @@
+<div>
+    <div class="absolute inset-0">
+        <img src="/assets/images/auth/bg-gradient.png" alt="image" class="h-full w-full object-cover" />
+    </div>
+
+    <div
+        class="relative flex min-h-screen items-center justify-center bg-[url(/assets/images/candles1.jpg)] bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16">
+        <img src="/assets/images/auth/coming-soon-object1.png" alt="image"
+            class="absolute left-0 top-1/2 h-full max-h-[893px] -translate-y-1/2" />
+        <img src="/assets/images/auth/coming-soon-object2.png" alt="image"
+            class="absolute left-24 top-0 h-40 md:left-[30%]" />
+        <img src="/assets/images/auth/coming-soon-object3.png" alt="image" class="absolute right-0 top-0 h-[300px]" />
+        <img src="/assets/images/auth/polygon-object.svg" alt="image" class="absolute bottom-0 end-[28%]" />
+        <div
+            class="relative w-full max-w-[870px] rounded-md bg-[linear-gradient(45deg,#fff9f9_0%,rgba(255,255,255,0)_25%,rgba(255,255,255,0)_75%,_#fff9f9_100%)] p-2 dark:bg-[linear-gradient(52.22deg,#0E1726_0%,rgba(14,23,38,0)_18.66%,rgba(14,23,38,0)_51.04%,rgba(14,23,38,0)_80.07%,#0E1726_100%)]">
+            <div
+                class="relative flex flex-col justify-center rounded-md bg-white/60 px-6 py-20 backdrop-blur-lg dark:bg-black/50 lg:min-h-[758px]">
+                <div class="relative w-full max-w-[870px] rounded-md bg-white p-6"
+     style="color: #fff;background-color: rgb(31 41 55 / 0%);">
+    <h1 class="text-2xl font-bold mb-4 text-center">Ready For <span style="color: #00ab55;"><strong> Unleash </strong></span> Your Trading Potential <span style="color: #00ab55;"><strong> ??? </strong></span></h1>
+
+    <form #form="ngForm" class="space-y-6" (ngSubmit)="submitAndNavigate(form)">
+        <!-- Question 1 -->
+        <div>
+            <label class="block text-lg font-medium">1. How often do you review your trading journal?</label>
+            <div class="mt-2 space-y-2">
+                <label class="flex items-center">
+                    <input style="border-color: #fff;" type="radio" name="reviewFrequency" value="daily"
+                        class="form-radio text-primary mr-2" required ngModel>
+                    Daily
+                </label>
+                <label class="flex items-center">
+                    <input style="border-color: #fff;" type="radio" name="reviewFrequency" value="weekly"
+                        class="form-radio text-primary mr-2" required ngModel>
+                    Weekly
+                </label>
+                <label class="flex items-center">
+                    <input style="border-color: #fff;" type="radio" name="reviewFrequency" value="monthly"
+                        class="form-radio text-primary mr-2" required ngModel>
+                    Monthly
+                </label>
+                <label class="flex items-center">
+                    <input style="border-color: #fff;" type="radio" name="reviewFrequency" value="rarely"
+                        class="form-radio text-primary mr-2" required ngModel>
+                    Rarely
+                </label>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div>
+            <label class="block text-lg font-medium">2. What is the primary trading strategy you use?</label>
+            <input style="border-color: #fff;" type="text" name="tradingStrategy"
+                class="form-input w-full mt-2 p-2 border rounded-md"
+                placeholder="Describe your strategy" required ngModel>
+        </div>
+
+        <!-- Question 3 -->
+        <div>
+            <label class="block text-lg font-medium">3. Do you set daily profit goals?</label>
+            <div class="mt-2">
+                <label class="flex items-center">
+                    <input style="border-color: #fff;" type="radio" name="profitGoals" value="yes"
+                        class="form-radio text-primary mr-2" required ngModel>
+                    Yes
+                </label>
+                <label class="flex items-center">
+                    <input style="border-color: #fff;" type="radio" name="profitGoals" value="no"
+                        class="form-radio text-primary mr-2" required ngModel>
+                    No
+                </label>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div>
+            <label class="block text-lg font-medium">4. How do you manage risk in your trades?</label>
+            <textarea style="border-color: #fff;" name="riskManagement" rows="3"
+                class="form-textarea w-full mt-2 p-2 border rounded-md"
+                placeholder="Describe your risk management strategies" required ngModel></textarea>
+        </div>
+
+        <!-- Question 5 -->
+        <div>
+            <label class="block text-lg font-medium">5. What trading platform do you use?</label>
+            <input style="border-color: #fff;" type="text" name="tradingPlatform"
+                class="form-input w-full mt-2 p-2 border rounded-md" placeholder="E.g., MetaTrader 5" required ngModel>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit"
+            class="btn btn-gradient !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]"
+            [disabled]="form.invalid">
+            Submit Answers
+        </button>
+    </form>
+</div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

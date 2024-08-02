@@ -21,6 +21,7 @@ import { AuthService } from '../service/auth.service'; // Adjust the path if nec
 export class BoxedSigninComponent {
     email: string = '';
     password: string = '';
+    errorMessage: string = '';
     store: any;
     constructor(
         public translate: TranslateService,
@@ -35,16 +36,28 @@ export class BoxedSigninComponent {
     }
 
     onLogin(): void {
-        this.authService.login(this.email, this.password).subscribe((response) => {
+        if (!this.email || !this.password) {
+            this.errorMessage = 'Please fill in both email and password.';
+            return;
+        }
 
-            console.log(response, "response got in ui")
-            
-            if (response && response.accessToken) {
-                // Successful login, navigate to dashboard or another page
-                this.router.navigate(['/dashboard']);
-            } else {
-                // Handle login failure
-                console.error('Login failed');
+        this.authService.login(this.email, this.password).subscribe({
+            next: (response) => {
+                console.log(response, "response got in UI");
+
+                if (response && response.accessToken) {
+                    this.router.navigate(['/auth/welcome']);
+                } else {
+                    this.errorMessage = 'Login failed/Incorrect Password. Please try again.';
+                }
+            },
+            error: (error) => {
+                if (error.status === 400) {
+                    this.errorMessage = 'Invalid credentials. Please check your email and password.';
+                } else {
+                    this.errorMessage = 'An error occurred. Please try again later.';
+                }
+                console.error('Login failed', error);
             }
         });
     }

@@ -16,14 +16,9 @@
                         "outputPath": "dist",
                         "index": "src/index.html",
                         "main": "src/main.ts",
-                        "polyfills": [
-                            "zone.js"
-                        ],
+                        "polyfills": ["zone.js"],
                         "tsConfig": "tsconfig.app.json",
-                        "assets": [
-                            "src/assets",
-                            "src/demo-prepare.html"
-                        ],
+                        "assets": ["src/assets", "src/demo-prepare.html"],
                         "styles": [
                             "src/assets/css/app.css"
                         ],
@@ -36,7 +31,7 @@
                             "apexcharts",
                             "bezier-easing",
                             "sweetalert2",
-                            "file-saver",
+                            "file-saver",   
                             "angular2-text-mask",
                             "quill",
                             "ng2-flatpickr"
@@ -90,18 +85,10 @@
                 "test": {
                     "builder": "@angular-devkit/build-angular:karma",
                     "options": {
-                        "polyfills": [
-                            "zone.js",
-                            "zone.js/testing"
-                        ],
+                        "polyfills": ["zone.js", "zone.js/testing"],
                         "tsConfig": "tsconfig.spec.json",
-                        "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
-                        ],
-                        "styles": [
-                            "src/styles.css"
-                        ],
+                        "assets": ["src/favicon.ico", "src/assets"],
+                        "styles": ["src/styles.css"],
                         "scripts": []
                     }
                 }
@@ -109,6 +96,6 @@
         }
     },
     "cli": {
-      "analytics": false
+        "analytics": false
     }
 }

@@ -4,7 +4,7 @@
     </div>
 
     <div
-        class="relative flex min-h-screen items-center justify-center bg-[url(/assets/images/auth/map.png)] bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16">
+        class="relative flex min-h-screen items-center justify-center bg-[url(/assets/images/candles1.jpg)] bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16">
         <img src="/assets/images/auth/coming-soon-object1.png" alt="image"
             class="absolute left-0 top-1/2 h-full max-h-[893px] -translate-y-1/2" />
         <img src="/assets/images/auth/coming-soon-object2.png" alt="image"
@@ -61,12 +61,13 @@
                             <label for="Name">Name</label>
                             <div class="relative text-white-dark">
                                 <input id="Name" type="text" placeholder="Enter Name"
-                                    class="form-input ps-10 placeholder:text-white-dark" [(ngModel)]="name"
-                                    name="name" required/>
+                                    class="form-input ps-10 placeholder:text-white-dark" [(ngModel)]="name" name="name"
+                                    required />
                                 <span class="absolute start-4 top-1/2 -translate-y-1/2">
                                     <icon-user [fill]="true" />
                                 </span>
                             </div>
+                            <div *ngIf="formSubmitted && errors.name" class="text-red-500 mt-1">{{ errors.name }}**</div>
                         </div>
                         <div>
                             <label for="Email">Email</label>
@@ -77,6 +78,8 @@
                                 <span class="absolute start-4 top-1/2 -translate-y-1/2">
                                     <icon-mail [fill]="true" />
                                 </span>
+                            </div>
+                            <div *ngIf="formSubmitted && errors.email" class="text-red-500 mt-1">{{ errors.email }}**
                             </div>
                         </div>
                         <div>
@@ -89,8 +92,9 @@
                                     <icon-phone-call [fill]="true"></icon-phone-call>
                                 </span>
                             </div>
+                            <div *ngIf="formSubmitted && errors.mobile" class="text-red-500 mt-1">{{ errors.mobile }}**
+                            </div>
                         </div>
-
                         <div>
                             <label for="Password">Password</label>
                             <div class="relative text-white-dark">
@@ -101,6 +105,8 @@
                                     <icon-lock-dots [fill]="true" />
                                 </span>
                             </div>
+                            <div *ngIf="formSubmitted && errors.password" class="text-red-500 mt-1">{{ errors.password
+                                }}**</div>
                         </div>
                         <div>
                             <label class="flex cursor-pointer items-center">
@@ -113,6 +119,7 @@
                             Sign Up
                         </button>
                     </form>
+
 
 
 

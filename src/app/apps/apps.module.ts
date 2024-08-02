@@ -42,6 +42,8 @@ import { ChatComponent } from './chat';
 import { MailboxComponent } from './mailbox';
 import { InvoiceListComponent } from './invoice/list';
 
+import { AuthGuard } from '../service/auth.guard';
+
 const routes: Routes = [
     { path: 'apps/chat', component: ChatComponent, title: 'Chat | VRISTO - Multipurpose Tailwind Dashboard Template' },
     { path: 'apps/mailbox', component: MailboxComponent, title: 'Mailbox | VRISTO - Multipurpose Tailwind Dashboard Template' },
@@ -53,7 +55,7 @@ const routes: Routes = [
     { path: 'apps/invoice/preview', component: InvoicePreviewComponent, title: 'Invoice Preview | VRISTO - Multipurpose Tailwind Dashboard Template' },
     { path: 'apps/invoice/add', component: InvoiceAddComponent, title: 'Invoice Add | VRISTO - Multipurpose Tailwind Dashboard Template' },
     { path: 'apps/invoice/edit', component: InvoiceEditComponent, title: 'Invoice Edit | VRISTO - Multipurpose Tailwind Dashboard Template' },
-    { path: 'apps/calendar', component: CalendarComponent, title: 'Calendar | VRISTO - Multipurpose Tailwind Dashboard Template' },
+    { path: 'apps/calendar', component: CalendarComponent, canActivate: [AuthGuard], title: 'Calendar | VRISTO - Multipurpose Tailwind Dashboard Template' },
 ];
 
 @NgModule({

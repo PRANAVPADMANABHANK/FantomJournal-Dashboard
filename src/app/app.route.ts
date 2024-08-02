@@ -42,9 +42,9 @@ export const routes: Routes = [
             // dashboard
             {path:'', component:LandingComponent},
             { path: 'dashboard', component: IndexComponent, canActivate: [AuthGuard], title: 'Sales Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
-            { path: 'analytics', component: AnalyticsComponent, title: 'Analytics Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
-            { path: 'finance', component: FinanceComponent, title: 'Finance Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
-            { path: 'crypto', component: CryptoComponent, title: 'Crypto Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
+            { path: 'analytics', component: AnalyticsComponent, canActivate: [AuthGuard], title: 'Analytics Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
+            { path: 'finance', component: FinanceComponent, canActivate: [AuthGuard], title: 'Finance Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
+            { path: 'crypto', component: CryptoComponent, canActivate: [AuthGuard], title: 'Crypto Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
 
             //apps
             { path: '', loadChildren: () => import('./apps/apps.module').then((d) => d.AppsModule) },

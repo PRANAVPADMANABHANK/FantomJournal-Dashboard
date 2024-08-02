@@ -20,8 +20,11 @@ import { ApiService } from '../service/api.service';
 export class BoxedSignupComponent {
     name: string = '';
     email: string = '';
-    mobile: number = 0;
+    mobile: any;
     password: string = '';
+
+    formSubmitted: boolean = false;
+    errors: any = {};
 
     store: any;
     constructor(
@@ -36,6 +39,28 @@ export class BoxedSignupComponent {
     }
 
     onSubmit() {
+        this.formSubmitted = true;
+        this.errors = {}; // Reset errors
+
+        // Basic validation
+        if (!this.name) {
+            this.errors.name = 'Name is required';
+        }
+        if (!this.email) {
+            this.errors.email = 'Email is required';
+        }
+        if (!this.mobile) {
+            this.errors.mobile = 'Mobile number is required';
+        }
+        if (!this.password) {
+            this.errors.password = 'Password is required';
+        }
+
+        // If there are validation errors, don't proceed
+        if (Object.keys(this.errors).length > 0) {
+            return;
+        }
+
         const signupData = {
             name: this.name,
             email: this.email,
@@ -43,17 +68,39 @@ export class BoxedSignupComponent {
             password: this.password,
         };
 
-        console.log("submit success")
         // Send data to the server
         this.apiService.signup(signupData).subscribe({
             next: (response) => {
-              console.log('Signup successful', response);
-              this.router.navigate(['/auth/boxed-signin']);
+                console.log('Signup successful', response);
+                this.router.navigate(['/auth/boxed-signin']);
             },
             error: (error) => {
-              console.error('Signup failed', error);
+                if (error.status === 500 && error.error.error && error.error.error.includes('E11000 duplicate key error')) {
+                    const duplicateField = error.error.error.includes('email') ? 'email' : 'another field';
+                    console.error(`Signup failed: Duplicate ${duplicateField}`);
+                    // Display the error message to the user
+                    alert(`The ${duplicateField} "${signupData.email}" is already in use. Please use a different ${duplicateField}.`);
+                } else {
+                    console.error('Signup failed', error);
+                    // Handle other errors
+                    alert('Signup failed. Please try again.');
+                }
             },
-          });
+        });
+    }
+
+    handleSignupErrors(error: any) {
+        if (error && error.error && error.error.errors) {
+            const errors = error.error.errors;
+            this.errors = {
+                name: errors.name?.message || '',
+                email: errors.email?.message || '',
+                mobile: errors.mobile?.message || '',
+                password: errors.password?.message || '',
+            };
+        } else {
+            console.error('Unexpected error:', error);
+        }
     }
 
     async initStore() {

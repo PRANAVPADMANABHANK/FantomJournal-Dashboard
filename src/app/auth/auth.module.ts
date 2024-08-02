@@ -2,10 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AuthGuard } from '../service/auth.guard';
+
 
 
 // icon
 import { IconModule } from 'src/app/shared/icon/icon.module';
+
 
 import { BoxedLockscreenComponent } from './boxed-lockscreen';
 import { BoxedPasswordResetComponent } from './boxed-password-reset';
@@ -15,6 +18,8 @@ import { CoverLockscreenComponent } from './cover-lockscreen';
 import { CoverLoginComponent } from './cover-login';
 import { CoverPasswordResetComponent } from './cover-password-reset';
 import { CoverRegisterComponent } from './cover-register';
+import {Welcome} from './welcome';
+import {WelcomeQst} from './welcome-qst';
 
 // headlessui
 import { MenuModule } from 'headlessui-angular';
@@ -36,6 +41,8 @@ const routes: Routes = [
         title: 'Cover Password Reset | VRISTO - Multipurpose Tailwind Dashboard Template',
     },
     { path: 'auth/cover-register', component: CoverRegisterComponent, title: 'Cover Register | VRISTO - Multipurpose Tailwind Dashboard Template' },
+    { path: 'auth/welcome', canActivate: [AuthGuard], component: Welcome },
+    { path: 'auth/welcome-qst', canActivate: [AuthGuard], component: WelcomeQst },
 ];
 @NgModule({
     imports: [RouterModule.forChild(routes), CommonModule, MenuModule, IconModule,FormsModule],
@@ -48,6 +55,7 @@ const routes: Routes = [
         CoverLoginComponent,
         CoverPasswordResetComponent,
         CoverRegisterComponent,
+        WelcomeQst
     ],
 })
 export class AuthModule {}
